@@ -1,0 +1,23 @@
+Moduły:
+
+1. Plansza
+	- tablica int
+		→ pytanie: czy tablica jest najlepsze? Czy nie lepiej byłoby jakąś kolekcję np HashMap? 
+		→ dlaczego int, a nie String? - Inta łatwiej sprawdzić (dodawanie)
+	- '-1' oznacza x, '1' oznacza o, '0' oznacza pustą komórkę
+	- metoda sprawdzająca czy gra jest zakończona
+	- metoda sprawdzająca kto wygrał
+	- czyszczenie planszy
+	- wykonywanie ruchu (przyjmuje informację jaki znak oraz gdzie ma być wstawiony); jeżeli nie można wykonać ruchu rzuca wyjątek
+	Problem:
+		dwie metody: sprawdzająca czy gra jest zakończona oraz sprawdzająca kto wygrał; potrzebują dostępu do tych samych danych
+		Jeżeli gra nie jest zakończona - wszystko jest ok.
+		Jeżeli gra jest zakończona, nastąpi wywołanie metody, 'kto wygrał' i ponowna iteracja po tych samych danych
+	Rozwiązanie:
+		Byćmoże możliwe jest połączenie dwóch metod w jedną.
+		Sugerowane metoda:
+			jako wynik daje int:
+				· -1 jeżeli wygrał x
+				· 1 jeżeli wygrało o
+				· 0 jeżeli remis
+				· coś innego, jeżeli gra trwa dalej

@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Scanner;
 
 /**
  * Reprezentuje planszę do gry w kółko i  krzyżyk
@@ -6,6 +7,7 @@ import java.io.*;
 public class Plansza {
     private int[][] plansza;
     PrintWriter wyj = new PrintWriter(System.out, true);
+    Scanner sc = new Scanner(System.in);
 
     public Plansza() {
         plansza = new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
@@ -21,6 +23,14 @@ public class Plansza {
             }
             wyj.println();
         }
+    }
+
+    public void ruchGracza(){
+        wyj.println("Podaj numer wiersza: ");
+        int w = sc.nextInt();
+        wyj.println("Podaj numer kolumny: ");
+        int k = sc.nextInt();
+        plansza[w][k]= -1;
     }
 
 

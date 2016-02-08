@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.Scanner;
 
 /**
  * Reprezentuje planszę do gry w kółko i  krzyżyk
@@ -7,7 +6,6 @@ import java.util.Scanner;
 public class Plansza {
     private int[][] plansza;
     PrintWriter wyj = new PrintWriter(System.out, true);
-    Scanner sc = new Scanner(System.in);
 
     public Plansza() {
         plansza = new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
@@ -25,12 +23,18 @@ public class Plansza {
         }
     }
 
-    public void ruchGracza(){
-        wyj.println("Podaj numer wiersza: ");
-        int w = sc.nextInt();
-        wyj.println("Podaj numer kolumny: ");
-        int k = sc.nextInt();
-        plansza[w][k]= -1;
+    /**
+     * Zapisuje ruch gracza w planszy
+     *
+     * @param kolumna kolumna w której gracz wykonuje ruch
+     * @param wiersz wiersz w którym gracz wykonuje ruch
+     * @param gracz 'wartość' gracza (1 lub -1)
+     */
+    public void ruchGracza(int kolumna, int wiersz, int gracz) {
+        if ((kolumna < 0) || (kolumna > 2) || (wiersz < 0) || (wiersz > 2)) {
+            throw NullPointerException("Nieprawidłowy adres komórki");
+        }
+        this.plansza[wiersz][kolumna] = gracz;
     }
 
 

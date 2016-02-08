@@ -1,0 +1,9 @@
+$ cat .gitignore
+*.[oa]
+*~
+*.iml
+.project
+.settings
+.idea
+.classpath
+bin

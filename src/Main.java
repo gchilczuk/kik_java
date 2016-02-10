@@ -6,7 +6,5 @@ public class Main {
         // TODO Auto-generated method stub
         Plansza p = new Plansza();
         p.drukuj();
-
-
     }
 }

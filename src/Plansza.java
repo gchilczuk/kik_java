@@ -74,14 +74,14 @@ public class Plansza {
      */
     public int ktoWygral(){
     	int wynik = 0;
-    	if (	sumaWiersza(0) == 3 ||
-    			sumaWiersza(1) == 3 ||
-    			sumaWiersza(2) == 3 ||
-    			sumaKolumny(0) == 3 ||
-    			sumaKolumny(1) == 3 ||
-    			sumaKolumny(2) == 3 ||
-    			sumaPrzekatnej1() == 3 ||
-    			sumaPrzekatnej2() == 3)
+    	if (    sumaWiersza(0) == 3 ||
+    	sumaWiersza(1) == 3 ||
+    	sumaWiersza(2) == 3 ||
+    	sumaKolumny(0) == 3 ||
+    	sumaKolumny(1) == 3 ||
+    	sumaKolumny(2) == 3 ||
+    	sumaPrzekatnej1() == 3 ||
+    	sumaPrzekatnej2() == 3)
     		wynik = 1;
     	else if (	sumaWiersza(0) == -3 ||
     				sumaWiersza(1) == -3 ||

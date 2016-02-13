@@ -5,7 +5,24 @@ import java.io.*;
  * Reprezentuje plansze do gry w kolko i  krzyzyk
  */
 public class Plansza {
+    /**
+     * wartość kółka; żeby zapamiętać i się nie myliło
+     */
+    static int _O = -1;
+
+    /**
+     * wartość krzyżyka; żeby zapamiętać i się nie myliło
+     */
+    static int _X = 1;
+
+    /**
+     * Tablica przechowująca stan planszy
+     */
     private int[][] plansza;
+
+    /**
+     * PrintWriter standardowego wyjścia
+     */
     PrintWriter wyj = new PrintWriter(System.out, true);
 
     public Plansza() {
@@ -69,6 +86,21 @@ public class Plansza {
     }
 
     /**
+     *
+     * @return -1 jeżeli wygrało kółko; 1 jeżeli krzyżyk; 0 jeżeli remis
+     */
+    public int ktoWygral(){
+
+    }
+
+    /**
+     * Czyści planszę
+     */
+    public void wyczysc(){
+        this.plansza = new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+    }
+    
+    /**
      * Metoda pomocnicza
      *
      * Sumuje wiersz planszy
@@ -92,10 +124,9 @@ public class Plansza {
     }
     
     /**
-     * Sumuje "pierwsza" przek�tn� planszy
-     * @return suma elementow przek�tnej
+     * Sumuje "pierwsza" przek�tn� planszy
+     * @return suma elementow przek�tnej
      */
-    
     private int sumaPrzekatnej1(){
     	return this.plansza[0][0] + this.plansza[1][1] + this.plansza[2][2];
     }
@@ -104,7 +135,6 @@ public class Plansza {
      * Sumuje druga przekatna
      * @return suma elementow przekatnej
      */
-    
     private int sumaPrzekatnej2(){
     	return this.plansza[2][0] + this.plansza[1][1] + this.plansza[0][2];
     }

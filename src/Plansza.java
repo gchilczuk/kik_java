@@ -94,7 +94,6 @@ public class Plansza {
     		wynik = -1;
     	
     	return wynik;
-    			
     }
 
     /**
@@ -121,8 +120,8 @@ public class Plansza {
     }
     
     /**
-     * Sumuje "pierwsza" przekπtnπ planszy
-     * @return suma elementow przekπtnej
+     * Sumuje "pierwsza" przek≈°tn≈° planszy
+     * @return suma elementow przek≈°tnej
      */
     
     private int sumaPrzekatnej1(){

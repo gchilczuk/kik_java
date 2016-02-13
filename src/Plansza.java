@@ -92,7 +92,6 @@ public class Plansza {
     				sumaPrzekatnej1() == -3 ||
     				sumaPrzekatnej2() == -3)
     		wynik = -1;
-    	
     	return wynik;
     }
 

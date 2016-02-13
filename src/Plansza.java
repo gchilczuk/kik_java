@@ -48,7 +48,7 @@ public class Plansza {
      * @param wiersz wiersz w ktorym gracz wykonuje ruch
      * @param gracz 'wartosc' gracza (1 lub -1)
      */
-    public void ruchGracza(int kolumna, int wiersz, int gracz) {
+    public void ruchGracza(int wiersz, int kolumna, int gracz) {
         if ((kolumna < 0) || (kolumna > 2) || (wiersz < 0) || (wiersz > 2)) {
             throw new NullPointerException("Nieprawidlowy adres komorki");
         }
@@ -84,14 +84,34 @@ public class Plansza {
         return czy_wygrana || czy_remis;
 
     }
-
+    
     /**
-     *
-     * @return -1 jeżeli wygrało kółko; 1 jeżeli krzyżyk; 0 jeżeli remis
+     * Sprawdza, ktory gracz wygral
+     * @return wartosc gracza, ktory zwyciezyl(1 lub -1) lub 0 (gdy remis)
      */
     public int ktoWygral(){
-
+    	int wynik = 0;
+    	if (    sumaWiersza(0) == 3 ||
+    	sumaWiersza(1) == 3 ||
+    	sumaWiersza(2) == 3 ||
+    	sumaKolumny(0) == 3 ||
+    	sumaKolumny(1) == 3 ||
+    	sumaKolumny(2) == 3 ||
+    	sumaPrzekatnej1() == 3 ||
+    	sumaPrzekatnej2() == 3)
+    		wynik = 1;
+    	else if (	sumaWiersza(0) == -3 ||
+    				sumaWiersza(1) == -3 ||
+    				sumaWiersza(2) == -3 ||
+    				sumaKolumny(0) == -3 ||
+    				sumaKolumny(1) == -3 ||
+    				sumaKolumny(2) == -3 ||
+    				sumaPrzekatnej1() == -3 ||
+    				sumaPrzekatnej2() == -3)
+    		wynik = -1;
+    	return wynik;
     }
+    
 
     /**
      * Czyści planszę
@@ -124,8 +144,8 @@ public class Plansza {
     }
     
     /**
-     * Sumuje "pierwsza" przek�tn� planszy
-     * @return suma elementow przek�tnej
+     * Sumuje "pierwsza" przekatna planszy
+     * @return suma elementow przekatnej
      */
     private int sumaPrzekatnej1(){
     	return this.plansza[0][0] + this.plansza[1][1] + this.plansza[2][2];

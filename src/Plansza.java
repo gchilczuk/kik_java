@@ -6,22 +6,22 @@ import java.io.*;
  */
 public class Plansza {
     /**
-     * wartość kółka; żeby zapamiętać i się nie myliło
+     * wartosc kolka; zeby zapamietac i sie nie mylilo
      */
     static int _O = -1;
 
     /**
-     * wartość krzyżyka; żeby zapamiętać i się nie myliło
+     * wartosc krzyzyka; zeby zapamietac i sie nie mylilo
      */
     static int _X = 1;
 
     /**
-     * Tablica przechowująca stan planszy
+     * Tablica przechowujaca stan planszy
      */
     private int[][] plansza;
 
     /**
-     * PrintWriter standardowego wyjścia
+     * PrintWriter standardowego wyjscia
      */
     PrintWriter wyj = new PrintWriter(System.out, true);
 
@@ -46,11 +46,14 @@ public class Plansza {
      *
      * @param kolumna kolumna w ktorej gracz wykonuje ruch
      * @param wiersz wiersz w ktorym gracz wykonuje ruch
-     * @param gracz 'wartosc' gracza (1 lub -1)
+     * @param gracz 'wartosc' gracza (1 lub -1) 
      */
     public void ruchGracza(int wiersz, int kolumna, int gracz) {
         if ((kolumna < 0) || (kolumna > 2) || (wiersz < 0) || (wiersz > 2)) {
             throw new NullPointerException("Nieprawidlowy adres komorki");
+        }
+        else if (this.plansza[wiersz][kolumna] != 0){
+        	throw new NullPointerException("To pole nie jest puste");
         }
         this.plansza[wiersz][kolumna] = gracz;
     }
@@ -92,29 +95,29 @@ public class Plansza {
     public int ktoWygral(){
     	int wynik = 0;
     	if (    sumaWiersza(0) == 3 ||
-    	sumaWiersza(1) == 3 ||
-    	sumaWiersza(2) == 3 ||
-    	sumaKolumny(0) == 3 ||
-    	sumaKolumny(1) == 3 ||
-    	sumaKolumny(2) == 3 ||
-    	sumaPrzekatnej1() == 3 ||
-    	sumaPrzekatnej2() == 3)
+    			sumaWiersza(1) == 3 ||
+    			sumaWiersza(2) == 3 ||
+    			sumaKolumny(0) == 3 ||
+    			sumaKolumny(1) == 3 ||
+    			sumaKolumny(2) == 3 ||
+    			sumaPrzekatnej1() == 3 ||
+    			sumaPrzekatnej2() == 3)
     		wynik = 1;
-    	else if (	sumaWiersza(0) == -3 ||
-    				sumaWiersza(1) == -3 ||
-    				sumaWiersza(2) == -3 ||
-    				sumaKolumny(0) == -3 ||
-    				sumaKolumny(1) == -3 ||
-    				sumaKolumny(2) == -3 ||
-    				sumaPrzekatnej1() == -3 ||
-    				sumaPrzekatnej2() == -3)
+    	else if (    sumaWiersza(0) == -3 ||
+    			     sumaWiersza(1) == -3 ||
+    			     sumaWiersza(2) == -3 ||
+    			     sumaKolumny(0) == -3 ||
+    			     sumaKolumny(1) == -3 ||
+    			     sumaKolumny(2) == -3 ||
+    			     sumaPrzekatnej1() == -3 ||
+    			     sumaPrzekatnej2() == -3)
     		wynik = -1;
     	return wynik;
     }
     
 
     /**
-     * Czyści planszę
+     * Czysci plansze
      */
     public void wyczysc(){
         this.plansza = new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};

@@ -35,7 +35,8 @@ public class Plansza {
     public void drukuj(){
         for(int i=0; i<plansza.length; i++){
             for(int j=0; j<plansza[0].length; j++){
-                wyj.printf("%3d%s",plansza[i][j]," ");
+                String komorka = plansza[i][j]==-1?"O":plansza[i][j]==1?"X":"—";
+                wyj.printf("%3s%s",komorka," ");
             }
             wyj.println();
         }

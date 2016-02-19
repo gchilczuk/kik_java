@@ -7,3 +7,4 @@ $ cat .gitignore
 .idea
 .classpath
 bin
+out

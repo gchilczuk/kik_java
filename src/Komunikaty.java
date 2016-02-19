@@ -1,16 +1,16 @@
 /**
- * Moduł zawierający komunikaty do gry
+ * Moduł zawierający Komunikaty do gry
  */
-public class komunikaty {
+public class Komunikaty {
 
-    public komunikaty() {}
+    public Komunikaty() {}
 
     /**
      * Zwraca komunikat o tym kto wygrał
      * @param kto -1 - kółko, 1 - krzyżyk, 0 - remis
      * @return komunikat o zwycięzcy
      */
-    public static String wygrana(int kto){
+    public String wygrana(int kto){
         String wynik;
         switch (kto){
             case -1:
@@ -37,7 +37,7 @@ public class komunikaty {
      * @param kto -1 kółko, 1 krzyżyk, 0 komputer (AI)
      * @return komunikat o tym kto ma wykonać ruch
      */
-    public static String twojRuch(int kto){
+    public String twojRuch(int kto){
         String ruch;
         switch (kto){
             case -1:
@@ -56,5 +56,5 @@ public class komunikaty {
         return ruch;
     }
 
-    public static String infoRuch(int kto, int k, int )
+    //public static String infoRuch(int kto, int k, int w)
 }

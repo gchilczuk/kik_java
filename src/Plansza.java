@@ -56,6 +56,7 @@ public class Plansza {
         	throw new NullPointerException("To pole nie jest puste");
         }
         this.plansza[wiersz][kolumna] = gracz;
+
     }
 
     /**

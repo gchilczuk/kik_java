@@ -132,7 +132,7 @@ public class Plansza {
      * @param i numer wiersza, ktory ma zostac zsumowany
      * @return suma elementow w wierszu
      */
-    private int sumaWiersza(int i){
+    public int sumaWiersza(int i){
         int s = 0;
         for (int j = 0; j < 3; j++)
             s += this.plansza[i][j];
@@ -144,7 +144,7 @@ public class Plansza {
      * @param i kolumna, ktora ma zostac zsumowana
      * @return suma elementow kolumny
      */
-    private int sumaKolumny(int i){
+    public int sumaKolumny(int i){
         return this.plansza[0][i] + this.plansza[1][i] + this.plansza[2][i];
     }
     
@@ -152,7 +152,7 @@ public class Plansza {
      * Sumuje "pierwsza" przekatna planszy
      * @return suma elementow przekatnej
      */
-    private int sumaPrzekatnej1(){
+    public int sumaPrzekatnej1(){
     	return this.plansza[0][0] + this.plansza[1][1] + this.plansza[2][2];
     }
     
@@ -160,10 +160,18 @@ public class Plansza {
      * Sumuje druga przekatna
      * @return suma elementow przekatnej
      */
-    private int sumaPrzekatnej2(){
+    public int sumaPrzekatnej2(){
     	return this.plansza[2][0] + this.plansza[1][1] + this.plansza[0][2];
     }
 
-
+    /**
+     * Getter, zwraca wartość liczbową wskazanego pola planszy
+     * @param w wiersz
+     * @param k kolumna
+     * @return wartość liczbowa wskazanego pola planszy
+     */
+    public int dajPole(int w, int k) {
+        return plansza[w][k];
+    }
 }
 

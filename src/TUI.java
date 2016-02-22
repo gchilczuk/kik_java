@@ -19,7 +19,6 @@ public class TUI {
      * Rozpoczyna grę
      */
     public void start(){
-        System.out.println("NO CO");
         this.wyj.printf("Czy chcesz grać z komputerem? (T/N)");
         String odp = this.sc.next();
         int i = 0;

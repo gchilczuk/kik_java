@@ -42,7 +42,6 @@ public class kik_AI {
     public int[] podajRuch_trudny(int kto, Plansza plansza){
         int[] ruch = wygraj(kto, plansza);
         if (ruch == null) ruch = blokuj(kto, plansza);
-        if (ruch == null) ruch = podajRuch_latwy(kto, plansza);
         if (ruch == null){
             int liczba_ruchow = 0;
             for (int w = 0; w <3; w++)
@@ -91,7 +90,7 @@ public class kik_AI {
             }
         }
 
-        for (int i = 0; i<3 && ruch == null; i++){
+        for (int i = 0;  ruch == null && i<3; i++){
             if (plansza.sumaKolumny(i) == 2*kto){
                 for (int j = 0; j < 3 && ruch == null; j++)
                     if (plansza.dajPole(j, i) == 0) ruch = new int[] {j, i};
@@ -99,10 +98,10 @@ public class kik_AI {
         }
 
         if (ruch == null && plansza.sumaPrzekatnej1()==2*kto)
-            ruch = plansza.dajPole(0,0) == 0 ? new int[] {0,0} : plansza.dajPole(1,1) == 0 ? new int[] {1,1} : plansza.dajPole(2,2) == 0 ? new int[] {2,2} : null;
+            ruch = plansza.dajPole(0,0) == 0 ? new int[] {0,0} : plansza.dajPole(1,1) == 0 ? new int[] {1,1} : new int[] {2,2};
 
         if (ruch == null && plansza.sumaPrzekatnej2()==2*kto)
-            ruch = plansza.dajPole(0,2) == 0 ? new int[] {0,2} : plansza.dajPole(1,1) == 0 ? new int[] {1,1} : plansza.dajPole(2,0) == 0 ? new int[] {2,0} : null;
+            ruch = plansza.dajPole(0,2) == 0 ? new int[] {0,2} : plansza.dajPole(1,1) == 0 ? new int[] {1,1} : new int[] {2,0};
 
         return ruch;
     }

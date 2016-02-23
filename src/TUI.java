@@ -9,6 +9,7 @@ public class TUI {
     private Komunikaty komunikaty = new Komunikaty();
     private Scanner sc = new Scanner(System.in);
     private PrintWriter wyj = new PrintWriter(System.out,true);
+    private kik_AI kikAi = new kik_AI();
 
     public TUI(){
         System.out.println("Działam!!!!!");
@@ -32,7 +33,7 @@ public class TUI {
             throw new NullPointerException("Nie umiesz grać :'(");
 
         if (odp.equals("T")) {
-            wyj.println("Sory, nie działa");
+            this.graZKomputerem();
         } else {
             wyj.println("Grasz z drugą osobą");
             wyj.println("Gracz1 to O, Gracz2 to X");
@@ -51,6 +52,26 @@ public class TUI {
         }
         this.plansza.drukuj();
         this.wyj.println(this.komunikaty.wygrana(this.plansza.ktoWygral()));
+        this.koniec();
+    }
+
+    public void graZKomputerem() throws NullPointerException{
+        int kto = -1;
+        while (!plansza.czyKoniecGry()){
+            if (kto == -1){
+                this.plansza.drukuj();
+                int[] gdzie = this.podajRuch(kto);
+                this.plansza.ruchGracza(gdzie[0], gdzie[1], kto);
+                kto = -kto;
+            }else{
+                int[] gdzie = this.kikAi.podajRuch_normalny(kto,plansza);
+                this.plansza.ruchGracza(gdzie[0], gdzie[1], kto);
+                kto = -kto;
+            }
+        }
+        this.plansza.drukuj();
+        this.wyj.println(this.komunikaty.wygrana(this.plansza.ktoWygral()));
+        this.koniec();
     }
 
     /**
@@ -67,7 +88,15 @@ public class TUI {
         this.wyj.println("podaj kolumnę");
         int k = this.sc.nextInt();
         return new int[] {w,k};
+    }
 
+    public void koniec(){
+        this.wyj.println("Chcesz zagrać jeszcze raz? (T/N)");
+        String czy = this.sc.next();
+        if (czy.equals("T")){
+            this.plansza.wyczysc();
+            this.start();
+        }
 
     }
 

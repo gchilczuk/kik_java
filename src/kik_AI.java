@@ -13,7 +13,15 @@ public class kik_AI {
      * @return Tablica adresu
      */
     public int[] podajRuch_latwy(int kto, Plansza plansza){
-        return null;
+    	int[] ruch = null;
+    	while(ruch==null){	
+    	    int w = (int) (Math.random()*3);
+            int k = (int) (Math.random()*3);
+            if (plansza.dajPole(w,k) == 0){
+            	ruch = new int[] {w,k};
+            }
+    	}
+    	return ruch;
     }
 
     /**

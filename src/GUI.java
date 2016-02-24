@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 
 /**
@@ -10,13 +11,26 @@ import javax.swing.JFrame;
 public class GUI extends JFrame implements ActionListener {
 	
 	private Plansza plansza = new Plansza();
-	private JButton b1, b2, b3, b4, b5, b6, b7, b8, b9;
+	private JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, bStart, bStop;
 	private JButton[][] buttons = {{b1, b2, b3}, {b4, b5, b6}, {b7, b8, b9}};
+	private JCheckBox chKomp;
 	
 	public GUI(){
-		setSize(300,300);
+		setSize(500,300);
 		setTitle("Kółko i krzyżyk");
 		setLayout(null);
+		
+		bStart = new JButton("Start");
+		bStart.setBounds(280, 30, 80, 40);
+		add(bStart);
+		
+		bStop = new JButton("Stop");
+		bStop.setBounds(280, 80, 80, 40);
+		add(bStop);
+		
+		chKomp = new JCheckBox("Gra z komputerem");
+		chKomp.setBounds(280, 130, 160, 40);
+		add(chKomp);
 		
 		int x = 30;
 		int y = 30;

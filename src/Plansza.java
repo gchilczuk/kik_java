@@ -15,6 +15,8 @@ public class Plansza {
      */
     static int _X = 1;
 
+    private int kto = 1;
+
     /**
      * Tablica przechowujaca stan planszy
      */
@@ -47,17 +49,16 @@ public class Plansza {
      *
      * @param kolumna kolumna w ktorej gracz wykonuje ruch
      * @param wiersz wiersz w ktorym gracz wykonuje ruch
-     * @param gracz 'wartosc' gracza (1 lub -1) 
      */
-    public void ruchGracza(int wiersz, int kolumna, int gracz) {
+    public void ruchGracza(int wiersz, int kolumna) {
         if ((kolumna < 0) || (kolumna > 2) || (wiersz < 0) || (wiersz > 2)) {
             throw new NullPointerException("Nieprawidlowy adres komorki");
         }
         else if (this.plansza[wiersz][kolumna] != 0){
         	throw new NullPointerException("To pole nie jest puste");
         }
-        this.plansza[wiersz][kolumna] = gracz;
-
+        this.plansza[wiersz][kolumna] = this.kto;
+        this.kto = -this.kto;
     }
 
     /**
@@ -173,5 +174,15 @@ public class Plansza {
     public int dajPole(int w, int k) {
         return plansza[w][k];
     }
+
+    /**
+     * Informuje czyja jest teraz kolej gry
+     * @return czy ruch
+     */
+    public int getKto() {
+        return this.kto;
+    }
 }
+
+
 

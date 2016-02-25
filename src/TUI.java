@@ -33,10 +33,12 @@ public class TUI {
             this.wyj.println("Wybierz poziom trudności: 1 - łatwy, 2 - normalny, 3 - trudny");
             int poziom = this.sc.nextInt();
             if (poziom < 1 || poziom > 3) throw new NullPointerException("Nie ma takiego poziomu trudności");
+            this.kim_chcesz();
             this.graZKomputerem(poziom);
         } else {
             wyj.println("Grasz z drugą osobą");
             wyj.println("Gracz1 to O, Gracz2 to X");
+            this.kim_chcesz();
             this.graZCzlowiekem();
         }
     }
@@ -97,6 +99,13 @@ public class TUI {
             this.start();
         }
 
+    }
+
+    public void kim_chcesz(){
+        wyj.println("Kim chcesz grać? (O/X)");
+        String kim = sc.next();
+        if (kim.equals("O")) this.plansza.setKto(-1);
+        if (kim.equals("X")) this.plansza.setKto(1);
     }
 
 

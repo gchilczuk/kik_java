@@ -37,7 +37,7 @@ public class Plansza {
     public void drukuj(){
         for(int i=0; i<plansza.length; i++){
             for(int j=0; j<plansza[0].length; j++){
-                String komorka = plansza[i][j]==-1?"O":plansza[i][j]==1?"X":"—";
+                String komorka = plansza[i][j]==-1?"O":plansza[i][j]==1?"X":plansza[i][j]>2?"A":"—";
                 wyj.printf("%3s%s",komorka," ");
             }
             wyj.println();
@@ -124,6 +124,7 @@ public class Plansza {
      */
     public void wyczysc(){
         this.plansza = new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+        this.kto = 1;
     }
     
     /**
@@ -175,6 +176,8 @@ public class Plansza {
         return plansza[w][k];
     }
 
+    public void setPole(int w, int k, int var){ this.plansza[w][k] = var; }
+
     /**
      * Informuje czyja jest teraz kolej gry
      * @return czy ruch
@@ -182,6 +185,11 @@ public class Plansza {
     public int getKto() {
         return this.kto;
     }
+
+    public void setKto(int kto) {
+        this.kto = kto;
+    }
+
 }
 
 

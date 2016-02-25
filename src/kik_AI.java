@@ -134,8 +134,10 @@ public class kik_AI {
 
 
 
-            else ruch = this.podajRuch_latwy(kto, plansza);
         }
+        if (ruch == null) ruch = this.szukaj(plansza);
+        if (ruch == null) ruch = this.podajRuch_latwy(kto, plansza);
+
         return ruch;
     }
 
@@ -187,6 +189,29 @@ public class kik_AI {
             for (int k = 0; k <3; k++)
                 if(plansza.dajPole(w,k) != 0) liczba_ruchow++;
         return liczba_ruchow;
+    }
+
+    private int[] szukaj(Plansza plansza){
+        int[] znaleziony_ruch = null;
+        int ile_szans = 0;
+        int kto = plansza.getKto();
+        System.out.println("——————————————");
+
+        for (int w = 0; w <3 && znaleziony_ruch==null; w++){
+            for (int k = 0; k <3 && znaleziony_ruch==null; k++){
+                if (plansza.dajPole(w,k) == 0){
+                    plansza.setPole(w,k,kto);
+                    if (plansza.sumaWiersza(w) == 2*kto) ile_szans++;
+                    if (plansza.sumaKolumny(k) == 2*kto) ile_szans++;
+                    if ((w==1 && k==1) && (plansza.sumaPrzekatnej1() == 2*kto || plansza.sumaPrzekatnej2() == 2*kto)) ile_szans ++;
+                    if (ile_szans >= 2) znaleziony_ruch = new int[] {w,k};
+                    plansza.setPole(w,k,0);
+                    ile_szans=0;
+                }
+            }
+        }
+
+        return znaleziony_ruch;
     }
 
 }

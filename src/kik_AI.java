@@ -51,14 +51,12 @@ public class kik_AI {
         int[] ruch = wygraj(kto, plansza);
         if (ruch == null) ruch = blokuj(kto, plansza);
         if (ruch == null){
-            int liczba_ruchow = 0;
-            for (int w = 0; w <3; w++)
-                for (int k = 0; k <3; k++)
-                    if(plansza.dajPole(w,k) != 0) liczba_ruchow++;
+            int liczba_ruchow = this.liczba_ruchow(plansza);
             if (liczba_ruchow % 2 == 0)
                 ruch = niePrzegram_pierwszy(kto, plansza);
             else ruch = niePrzegram_drugi(kto, plansza);
         }
+        if (ruch == null) ruch = this.podajRuch_latwy(kto, plansza);
         return ruch;
     }
 
@@ -69,7 +67,34 @@ public class kik_AI {
      * @return tablica ruchu
      */
     public int[] niePrzegram_pierwszy(int kto, Plansza plansza){
-        return null;
+        int[] ruch = wygraj(kto, plansza);
+        if (ruch == null) ruch = blokuj(kto, plansza);
+
+        if (ruch == null){
+
+            if (this.liczba_ruchow(plansza) == 0) ruch = new int[] {0,0};
+
+            else if (this.liczba_ruchow(plansza) == 2){
+                if (plansza.dajPole(1,0) == -kto || plansza.dajPole(1,1) == -kto || plansza.dajPole(2,0) == -kto)
+                    ruch = new int[] {0,1};
+                else if(plansza.dajPole(0,1) == -kto || plansza.dajPole(0,2) == -kto)
+                    ruch = new int[] {1,0};
+                else if (plansza.dajPole(2,1) == -kto || plansza.dajPole(2,2) == -kto)
+                    ruch = new int[] {0,2};
+                else ruch = new int[] {1,1};
+            }
+
+            else if (this.liczba_ruchow(plansza) == 4){
+                if (plansza.dajPole(0,2) == -kto || plansza.dajPole(2,0) == -kto)
+                    ruch = new int[] {1,1};
+                if (plansza.dajPole(2,2) == -kto)
+                    ruch = new int[] {2,0};
+            }
+
+            else ruch = this.podajRuch_latwy(kto, plansza);
+
+        }
+        return ruch;
     }
 
     /**
@@ -79,7 +104,39 @@ public class kik_AI {
      * @return tablica ruchu
      */
     public int[] niePrzegram_drugi(int kto, Plansza plansza){
-        return null;
+        int[] ruch = wygraj(kto, plansza);
+        if (ruch == null) ruch = blokuj(kto, plansza);
+
+        if (ruch == null){
+
+            if (this.liczba_ruchow(plansza) == 1) ruch = plansza.dajPole(1,1) == 0 ? new int[] {1,1} : new int[] {0,0};
+
+            else if (this.liczba_ruchow(plansza) == 3){
+                if((plansza.dajPole(1,1) == -plansza.getKto()) ||
+                        (plansza.dajPole(0,1) + plansza.dajPole(1,0) == (-2)*plansza.getKto()) ||
+                        (plansza.dajPole(2,1) + plansza.dajPole(1,2) == (-2)*plansza.getKto()))
+                    ruch = new int[] {0,2};
+
+                if((plansza.dajPole(0,0) + plansza.dajPole(1,2) == (-2)*plansza.getKto()) ||
+                        (plansza.dajPole(1,0) + plansza.dajPole(0,2) == (-2)*plansza.getKto()))
+                    ruch = new int[] {2,1};
+
+                if(plansza.dajPole(1,1) == plansza.getKto() &&
+                        plansza.sumaPrzekatnej1() == -plansza.getKto() ||
+                        plansza.sumaPrzekatnej2() == -plansza.getKto() ||
+                        (plansza.dajPole(1,0) + plansza.dajPole(2,2) == (-2)*plansza.getKto()) ||
+                        (plansza.dajPole(2,0) + plansza.dajPole(1,2) == (-2)*plansza.getKto()))
+                    ruch = new int[] {0,1};
+
+
+
+            }
+
+
+
+            else ruch = this.podajRuch_latwy(kto, plansza);
+        }
+        return ruch;
     }
 
 
@@ -122,6 +179,14 @@ public class kik_AI {
      */
     public int[] blokuj(int kto, Plansza plansza){
         return wygraj(-kto, plansza);
+    }
+
+    private int liczba_ruchow(Plansza plansza){
+        int liczba_ruchow = 0;
+        for (int w = 0; w <3; w++)
+            for (int k = 0; k <3; k++)
+                if(plansza.dajPole(w,k) != 0) liczba_ruchow++;
+        return liczba_ruchow;
     }
 
 }

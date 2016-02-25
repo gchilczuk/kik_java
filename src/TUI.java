@@ -11,10 +11,7 @@ public class TUI {
     private PrintWriter wyj = new PrintWriter(System.out,true);
     private kik_AI kikAi = new kik_AI();
 
-    public TUI(){
-        System.out.println("Działam!!!!!");
-        this.wyj.println("Działam");
-    }
+    public TUI(){}
 
     /**
      * Rozpoczyna grę
@@ -33,7 +30,10 @@ public class TUI {
             throw new NullPointerException("Nie umiesz grać :'(");
 
         if (odp.equals("T")) {
-            this.graZKomputerem();
+            this.wyj.println("Wybierz poziom trudności: 1 - łatwy, 2 - normalny, 3 - trudny");
+            int poziom = this.sc.nextInt();
+            if (poziom < 1 || poziom > 3) throw new NullPointerException("Nie ma takiego poziomu trudności");
+            this.graZKomputerem(poziom);
         } else {
             wyj.println("Grasz z drugą osobą");
             wyj.println("Gracz1 to O, Gracz2 to X");
@@ -42,31 +42,26 @@ public class TUI {
     }
 
     public void graZCzlowiekem() throws NullPointerException{
-        int kto = -1;
         while (!plansza.czyKoniecGry()) {
             this.plansza.drukuj();
-            int[] gdzie = this.podajRuch(kto);
-            this.plansza.ruchGracza(gdzie[0], gdzie[1], kto);
+            int[] gdzie = this.podajRuch(plansza.getKto());
+            this.plansza.ruchGracza(gdzie[0], gdzie[1]);
             //this.komunikaty.infoRuch();
-            kto = kto==1?-1:1;
         }
         this.plansza.drukuj();
         this.wyj.println(this.komunikaty.wygrana(this.plansza.ktoWygral()));
         this.koniec();
     }
 
-    public void graZKomputerem() throws NullPointerException{
-        int kto = -1;
+    public void graZKomputerem(int poziom) throws NullPointerException{
         while (!plansza.czyKoniecGry()){
-            if (kto == -1){
+            if (plansza.getKto() == -1){
                 this.plansza.drukuj();
-                int[] gdzie = this.podajRuch(kto);
-                this.plansza.ruchGracza(gdzie[0], gdzie[1], kto);
-                kto = -kto;
+                int[] gdzie = this.podajRuch(plansza.getKto());
+                this.plansza.ruchGracza(gdzie[0], gdzie[1]);
             }else{
-                int[] gdzie = this.kikAi.podajRuch_normalny(kto,plansza);
-                this.plansza.ruchGracza(gdzie[0], gdzie[1], kto);
-                kto = -kto;
+                int[] gdzie = poziom == 1 ? this.kikAi.podajRuch_latwy(plansza.getKto(),plansza) : poziom == 2 ? this.kikAi.podajRuch_normalny(plansza.getKto(),plansza) : this.kikAi.podajRuch_trudny(plansza.getKto(),plansza);
+                this.plansza.ruchGracza(gdzie[0], gdzie[1]);
             }
         }
         this.plansza.drukuj();
@@ -90,6 +85,10 @@ public class TUI {
         return new int[] {w,k};
     }
 
+    /**
+     * Na zakończenie gry
+     * sprawdza czy gracz chce grać jeszcze raz
+     */
     public void koniec(){
         this.wyj.println("Chcesz zagrać jeszcze raz? (T/N)");
         String czy = this.sc.next();

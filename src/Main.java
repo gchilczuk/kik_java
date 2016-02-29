@@ -8,5 +8,6 @@ public class Main {
         //TUI tui = new TUI();
         //tui.start();
         GUI gui = new GUI();
+        gui.start();
     }
 }

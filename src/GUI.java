@@ -19,7 +19,7 @@ public class GUI extends JFrame implements ActionListener {
 	private final JButton bStart, bStop;
 	private JButton[][] buttons = {{b1, b2, b3}, {b4, b5, b6}, {b7, b8, b9}};
 	private JCheckBox chKomp;
-	private JLabel lInfo;	
+	private JLabel lInfo;
 	
 	public GUI(){
 		setSize(500,300);
@@ -57,11 +57,9 @@ public class GUI extends JFrame implements ActionListener {
 				bStart.setEnabled(true);
 				bStop.setEnabled(false);
 				//DODAC PANEL(?) ZEBY WSZYSTKIE PRZYCISKI ODRAZU USTAWIC!!!!!
-				for(int i = 0; i<3; i++){
-					for(int j=0; j<3; j++){
-						buttons[i][j].setEnabled(false);
-					}
-				}
+				wyzerujPlansze();
+				plansza.wyczysc();
+				lInfo.setText("");
 			}
 		});
 		
@@ -75,7 +73,6 @@ public class GUI extends JFrame implements ActionListener {
 						buttons[i][j].setEnabled(true);
 					}
 				}
-				
 			}
 		});
 		
@@ -107,6 +104,7 @@ public class GUI extends JFrame implements ActionListener {
 				if(zrodlo == buttons[i][j]){
 					ruchCzlowieka(i,j);
 					znal = true;
+					buttons[i][j].setEnabled(false);
 				}
 			}
 		}
@@ -116,30 +114,12 @@ public class GUI extends JFrame implements ActionListener {
 		if (chKomp.isSelected()){
 			graZKomputerem();
 		}
-		else {
-			if (plansza.czyKoniecGry()){
-				lInfo.setText(this.komunikaty.wygrana(this.plansza.ktoWygral()));
-				this.plansza.wyczysc();
-				this.wyzerujPlansze();
-				bStart.setEnabled(true);
-				bStop.setEnabled(false);
-			}
-		}
 	}
+
 	
 	public void graZKomputerem(){
 		
 	}
-	
-	/*
-	 * Nie wiem, czy ta metoda ma sens, czy wszystko od razu w start()
-	 * 
-	public void graZCzlowiekiem(){
-		if (plansza.czyKoniecGry()){
-			lInfo.setText(this.komunikaty .wygrana(this.plansza.ktoWygral()));
-		}
-	}
-	*/
 	
 	/**
 	 * Operacje, które mają być wykonane, gdy gracz wykonuje ruch
@@ -147,8 +127,11 @@ public class GUI extends JFrame implements ActionListener {
 	 * @param kolumna
 	 */
 	public void ruchCzlowieka(int wiersz, int kolumna){
-		this.plansza.ruchGracza(wiersz, kolumna);
 		this.buttons[wiersz][kolumna].setText(this.dajZnak(this.plansza.getKto()));
+		this.plansza.ruchGracza(wiersz, kolumna);
+		if(this.plansza.czyKoniecGry()){
+			lInfo.setText(this.komunikaty.wygrana(this.plansza.ktoWygral()));
+		}
 	}
 	
 	/**
@@ -163,10 +146,11 @@ public class GUI extends JFrame implements ActionListener {
 	/**
 	 * Czyści planszę
 	 */
-	public void wyzerujPlansze(){
+	public final void wyzerujPlansze(){
 		for(int i = 0; i<3; i++){
 			for(int j=0; j<3; j++){
 				buttons[i][j].setText("-");
+				buttons[i][j].setEnabled(false);
 			}
 		}
 	}
